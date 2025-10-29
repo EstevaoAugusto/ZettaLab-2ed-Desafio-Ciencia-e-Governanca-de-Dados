@@ -33,10 +33,8 @@ O projeto é um trabalho realizado individualmente na trilha "Ciência e Governa
 │   │   ├── tamanho_uf_2024.csv
 │   │   └── trad_municipio_tratados.csv
 │   └── raw                                             # Pasta de arquivos Brutos
-│       ├── Censo 2022 - Território - Brasil.csv
 │       ├── Dados_Tamanho_Brasil.ods
 │       ├── alfabetizacao_por_sexo,raca_e_idade.csv
-│       ├── homicidios.csv
 │       ├── pip_por_municipio.csv
 │       ├── pip_por_uf.csv
 │       ├── populacao_brasileira.csv
@@ -47,12 +45,11 @@ O projeto é um trabalho realizado individualmente na trilha "Ciência e Governa
 │   ├── pib_vs_valor_adicionado_em_lavras.png
 │   ├── pop_lavras_vs_top10_mun_mg.png
 │   └── taxa_alfabetizacao_lavras_vs_mg.png
-├── new_requirements.txt
 ├── notebooks                                           # Pasta dos notebooks usados
 │   ├── 1_coleta_preparacao_dados.ipynb
 │   ├── 2_analise_exploratoria.ipynb
 │   └── 3_modelo_predicao.ipynb
-└── requirements.txt
+└── requirements.txt                                    # Arquivo de dependencias necessárias para rodar os notebooks
 ```
 
 ## Datasets Escolhidos
@@ -75,7 +72,7 @@ Dados da População Brasileira inteira permitem realizar diversas operações e
 
 #### [Tabela de Tradução de Múnicipios](https://basedosdados.org/api/tables/downloadTable?p=YnJfYmRfZGlyZXRvcmlvc19icmFzaWw=&q=bXVuaWNpcGlv&d=dHJ1ZQ==&s=ZnJlZQ==)
 
-Esta tabela tem como propósito auxiliar a Ciência de Dados ao traduzir indentificadores de UFs e Múnicipios. Ele serve como forma de integrar diversas informações diferentes atráves de chaves universais e padronizadas do governo.
+Esta tabela tem como propósito auxiliar a Ciência de Dados ao traduzir identificadores de UFs e Múnicipios. Ele serve como forma de integrar diversas informações diferentes atráves de chaves universais e padronizadas do governo.
 
 #### [Censo 2022 - Alfabetização por Sexo, Raça e Grupo de Idade](https://basedosdados.org/dataset/08a1546e-251f-4546-9fe0-b1e6ab2b203d?table=cf9537b5-6198-455f-a8b0-7c762e94d79c)
 
