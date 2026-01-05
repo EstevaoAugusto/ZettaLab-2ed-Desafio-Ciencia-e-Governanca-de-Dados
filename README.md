@@ -5,8 +5,9 @@ O projeto é um trabalho realizado individualmente na trilha "Ciência e Governa
 ## Índices
 
 - [Estrutura do Projeto](#estrutura-do-projeto)
-- [Datasets Escolhidos](#datasets-escolhidos)
+- [Metodologia CRISP-DM](#metodologia-crisp-dm)
 - [Instalação](#instalação)
+- [Datasets Escolhidos](#datasets-escolhidos)
 - [Modelo de IA](#modelo-de-ia)
 - [Principais Insights](#principais-insights)
 - [Responsável](#responsável)
@@ -53,43 +54,18 @@ O projeto é um trabalho realizado individualmente na trilha "Ciência e Governa
 └── requirements.txt                                    # Arquivo de dependencias necessárias para rodar os notebooks
 ```
 
-## Datasets Escolhidos
+## Metodologia CRISP-DM
 
-Abaixo estão os datasets que foram selecionados para o projeto, sua descrição, e uso. O foco do problema é estudar os fatores socioeconomicos e multifatoriais que afetam o múnicipio de Lavras, localizado em Minas Gerais. Para isso, utilizamos desde de dados gerais do Brasil todo, como tambem, sobre seus estados, e Lavras em si. O foco da análise foi a partir de questões mais sociais, demográficas, e economicas, as quais estão apresentadas abaixo:
+Este projeto segue a metodologia **CRISP-DM** (Cross-Industry Standard Process for Data Mining), padrão mundial para projetos de ciência de dados.
 
-### [Base dos Dados](https://basedosdados.org/)
+<img src="./imgs/Diagrama-de-funcionamento-do-modelo-CRISP-DM.png">
 
-#### [Indice de Gini - UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=a5e13468-e1e4-4125-92e6-89d3b9c85e18)
-
-O índice de Gini, chamado também de coeficiente de Gini, é um indicador que mensura a distribuição de renda em um território (no caso do dataset, a nível estadual). Por meio dele, é possível determinar a desigualdade social e a concentração de renda em diferentes níveis territoriais, além de estabelecer comparativos entre eles.
-
-#### [Produto Interno Bruto (PIB) Por Municipio](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=fbbbe77e-d234-4113-8af5-98724a956943)
-
-Dados do PIB por Município permitem realizar comparações entre Lavras e outros múnicipios do Brasil, podendo usar seus fatores economicos para entender seu desenvolvimento e quais são mais relevantes.
-
-#### [Produto Interno Bruto (PIB) Por UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=93007431-7ce9-42ee-8740-8c2274d345ad)
-
-Dados do PIB por UF permitem realizar comparações entre diferentes estados do Brasil. Como Lavras é um múnicipio de Minas Gerais, o intuito é entender se ele está comforme os padrões e tendências do estado de Minas Gerais.
-
-#### [População Brasileira](https://basedosdados.org/dataset/1e2b9a88-9dc7-4f0e-a3a5-e8d2a13869bf?table=1a8d9636-c11d-443b-ae83-1b00576f0b70)
-
-Dados da População Brasileira inteira permitem realizar diversas operações em todo o brasil, desde de pequenas como em múnicipios e para todo o Brasil. A partir dele, são realizadas estimativas da quantidade populacional dos UFs a partir das projeções do número de habitantes em cada Múnicipio. 
-
-#### [Tabela de Tradução de Múnicipios](https://basedosdados.org/api/tables/downloadTable?p=YnJfYmRfZGlyZXRvcmlvc19icmFzaWw=&q=bXVuaWNpcGlv&d=dHJ1ZQ==&s=ZnJlZQ==)
-
-Esta tabela tem como propósito auxiliar a Ciência de Dados ao traduzir identificadores de UFs e Múnicipios. Ele serve como forma de integrar diversas informações diferentes atráves de chaves universais e padronizadas do governo.
-
-#### [Censo 2022 - Alfabetização por Sexo, Raça e Grupo de Idade](https://basedosdados.org/dataset/08a1546e-251f-4546-9fe0-b1e6ab2b203d?table=cf9537b5-6198-455f-a8b0-7c762e94d79c)
-
-Tabela contem dados de pessoas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo, cor ou raça e grupos de idade. Alfabetização é diferente de Educação Básica, já que se refere a capacidade de ler e escrever, enquanto a outra trata de aspectos formal, por exemplo: Ensino Médio Incompleto, Mestrado Completo, entre outros.
-
-#### [Educação Básica - Sexo Raça Cor](https://basedosdados.org/dataset/386927a4-4ee8-4975-8ff3-beece3474942?table=2eaf0bb5-8d7b-4d54-ae1a-85edf58c6978)
-
-A base conta com o total de matrículas por município para todas as etapas de ensino, sexo e raça/cor.
-
-### [Area IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?t=acesso-ao-produto&c=1)
-
-Essa tabela oferecem informações relacionadas ao tamanho territorial do brasil ao decorrer dos anos. Foi a partir dele que cálculos como densidade populacional foram realizados.
+- **Entendimento do negócio**: busca-se clarificar os objetivos do projeto e traduzir as necessidades dos stakeholders em problemas que possam ser resolvidos por meio de análise de dados. 
+- **Compreensão dos dados**: envolve a exploração inicial, incluindo a avaliação da qualidade, volume e relevância das informações disponíveis. 
+- **Preparação dos dados**: realizam-se atividades como limpeza, integração e transformação, visando criar um conjunto de dados adequado para modelagem. A fase de modelagem concentra-se na seleção e aplicação de algoritmos, ajustando-os para atender às especificidades do problema.
+- **Avaliação dos modelos**: ocorre por meio de métricas e validação, garantindo que os resultados sejam confiáveis e úteis. 
+- **Implementação**: foca na integração dos modelos em processos reais, assegurando que os insights gerados sejam aplicados de forma eficaz.
+- **Deploy**: Esse procedimento não foi realizado já que isso vai fora do escopo do desafio.
 
 ## Instalação
 
@@ -140,6 +116,44 @@ Execute os notebooks sequencialmente na pasta "notebooks"
 cd notebooks
 python run_pipeline.py
 ```
+
+## Datasets Escolhidos
+
+Abaixo estão os datasets que foram selecionados para o projeto, sua descrição, e uso. O foco do problema é estudar os fatores socioeconomicos e multifatoriais que afetam o múnicipio de Lavras, localizado em Minas Gerais. Para isso, utilizamos desde de dados gerais do Brasil todo, como tambem, sobre seus estados, e Lavras em si. O foco da análise foi a partir de questões mais sociais, demográficas, e economicas, as quais estão apresentadas abaixo:
+
+### [Base dos Dados](https://basedosdados.org/)
+
+#### [Indice de Gini - UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=a5e13468-e1e4-4125-92e6-89d3b9c85e18)
+
+O índice de Gini, chamado também de coeficiente de Gini, é um indicador que mensura a distribuição de renda em um território (no caso do dataset, a nível estadual). Por meio dele, é possível determinar a desigualdade social e a concentração de renda em diferentes níveis territoriais, além de estabelecer comparativos entre eles.
+
+#### [Produto Interno Bruto (PIB) Por Municipio](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=fbbbe77e-d234-4113-8af5-98724a956943)
+
+Dados do PIB por Município permitem realizar comparações entre Lavras e outros múnicipios do Brasil, podendo usar seus fatores economicos para entender seu desenvolvimento e quais são mais relevantes.
+
+#### [Produto Interno Bruto (PIB) Por UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=93007431-7ce9-42ee-8740-8c2274d345ad)
+
+Dados do PIB por UF permitem realizar comparações entre diferentes estados do Brasil. Como Lavras é um múnicipio de Minas Gerais, o intuito é entender se ele está comforme os padrões e tendências do estado de Minas Gerais.
+
+#### [População Brasileira](https://basedosdados.org/dataset/1e2b9a88-9dc7-4f0e-a3a5-e8d2a13869bf?table=1a8d9636-c11d-443b-ae83-1b00576f0b70)
+
+Dados da População Brasileira inteira permitem realizar diversas operações em todo o brasil, desde de pequenas como em múnicipios e para todo o Brasil. A partir dele, são realizadas estimativas da quantidade populacional dos UFs a partir das projeções do número de habitantes em cada Múnicipio. 
+
+#### [Tabela de Tradução de Múnicipios](https://basedosdados.org/api/tables/downloadTable?p=YnJfYmRfZGlyZXRvcmlvc19icmFzaWw=&q=bXVuaWNpcGlv&d=dHJ1ZQ==&s=ZnJlZQ==)
+
+Esta tabela tem como propósito auxiliar a Ciência de Dados ao traduzir identificadores de UFs e Múnicipios. Ele serve como forma de integrar diversas informações diferentes atráves de chaves universais e padronizadas do governo.
+
+#### [Censo 2022 - Alfabetização por Sexo, Raça e Grupo de Idade](https://basedosdados.org/dataset/08a1546e-251f-4546-9fe0-b1e6ab2b203d?table=cf9537b5-6198-455f-a8b0-7c762e94d79c)
+
+Tabela contem dados de pessoas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo, cor ou raça e grupos de idade. Alfabetização é diferente de Educação Básica, já que se refere a capacidade de ler e escrever, enquanto a outra trata de aspectos formal, por exemplo: Ensino Médio Incompleto, Mestrado Completo, entre outros.
+
+#### [Educação Básica - Sexo Raça Cor](https://basedosdados.org/dataset/386927a4-4ee8-4975-8ff3-beece3474942?table=2eaf0bb5-8d7b-4d54-ae1a-85edf58c6978)
+
+A base conta com o total de matrículas por município para todas as etapas de ensino, sexo e raça/cor.
+
+### [Area IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areas-dos-municipios.html?t=acesso-ao-produto&c=1)
+
+Essa tabela oferecem informações relacionadas ao tamanho territorial do brasil ao decorrer dos anos. Foi a partir dele que cálculos como densidade populacional foram realizados.
 
 ## Modelo de IA
 
@@ -195,6 +209,8 @@ Tabela acima demonstra o impacto que determinados agentes socioeconomicos possue
 <img src="./reports/pib_vs_valor_adicionado_em_lavras.png" alt="PIB e Valor Bruto Total de Preços adicionado em Lavras" width="600" >
 
 A tabela acima compara o PIB e o Valor Adicionado Total do município de Lavras. Nele, vemos que o PIB é superior ao VA Total. O principal insight é que a diferença entre esses dois valores, que representa os Impostos Líquidos sobre Produtos, é um componente substancial na composição da riqueza total gerada em Lavras, destacando a importância da arrecadação fiscal sobre bens e serviços para a economia municipal.
+
+## Recomendações Estratégicas
 
 ## Responsável
 
