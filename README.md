@@ -7,6 +7,7 @@ O projeto é um trabalho realizado individualmente na trilha "Ciência e Governa
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Datasets Escolhidos](#datasets-escolhidos)
 - [Instalação](#instalação)
+- [Modelo de IA](#modelo-de-ia)
 - [Principais Insights](#principais-insights)
 - [Responsável](#responsável)
 
@@ -58,13 +59,17 @@ Abaixo estão os datasets que foram selecionados para o projeto, sua descrição
 
 ### [Base dos Dados](https://basedosdados.org/)
 
+#### [Indice de Gini - UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=a5e13468-e1e4-4125-92e6-89d3b9c85e18)
+
+O índice de Gini, chamado também de coeficiente de Gini, é um indicador que mensura a distribuição de renda em um território (no caso do dataset, a nível estadual). Por meio dele, é possível determinar a desigualdade social e a concentração de renda em diferentes níveis territoriais, além de estabelecer comparativos entre eles.
+
 #### [Produto Interno Bruto (PIB) Por Municipio](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=fbbbe77e-d234-4113-8af5-98724a956943)
 
 Dados do PIB por Município permitem realizar comparações entre Lavras e outros múnicipios do Brasil, podendo usar seus fatores economicos para entender seu desenvolvimento e quais são mais relevantes.
 
 #### [Produto Interno Bruto (PIB) Por UF](https://basedosdados.org/dataset/fcf025ca-8b19-4131-8e2d-5ddb12492347?table=93007431-7ce9-42ee-8740-8c2274d345ad)
 
-Dados do PIB por UF permitem realizar comparações entre diferentes estados do Brasil. Como Lavras é um múnicipio de Minas Gerais, o intuito é entender se ele está comforme os padrões e tendências do estado.
+Dados do PIB por UF permitem realizar comparações entre diferentes estados do Brasil. Como Lavras é um múnicipio de Minas Gerais, o intuito é entender se ele está comforme os padrões e tendências do estado de Minas Gerais.
 
 #### [População Brasileira](https://basedosdados.org/dataset/1e2b9a88-9dc7-4f0e-a3a5-e8d2a13869bf?table=1a8d9636-c11d-443b-ae83-1b00576f0b70)
 
@@ -76,7 +81,7 @@ Esta tabela tem como propósito auxiliar a Ciência de Dados ao traduzir identif
 
 #### [Censo 2022 - Alfabetização por Sexo, Raça e Grupo de Idade](https://basedosdados.org/dataset/08a1546e-251f-4546-9fe0-b1e6ab2b203d?table=cf9537b5-6198-455f-a8b0-7c762e94d79c)
 
-Tabela contem dados de pessoas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo, cor ou raça e grupos de idade. Alfabetização é diferente de Educação Básica, já que se refere a capacidade de ler e escrever, enquanto a outra é formal, por exemplo: Ensino Médio Incompleto, Mestrado Completo, entre outros.
+Tabela contem dados de pessoas de 15 anos ou mais de idade, total e as alfabetizadas, por sexo, cor ou raça e grupos de idade. Alfabetização é diferente de Educação Básica, já que se refere a capacidade de ler e escrever, enquanto a outra trata de aspectos formal, por exemplo: Ensino Médio Incompleto, Mestrado Completo, entre outros.
 
 #### [Educação Básica - Sexo Raça Cor](https://basedosdados.org/dataset/386927a4-4ee8-4975-8ff3-beece3474942?table=2eaf0bb5-8d7b-4d54-ae1a-85edf58c6978)
 
@@ -124,12 +129,26 @@ Crie um arquivo .env
 touch .env
 ```
 
-Cadastre uma conta no Google Cloud, e crie um projeto. Após isso, coloque seu ID no .env
+Cadastre uma conta no Google Cloud, e crie um projeto. Após isso, coloque seu ID Project no .env
 ```bash
 echo "GOOGLE_CLOUD_ID_PROJECT='<seu-projeto-id>'" > .env
 ```
 
-Execute os notebooks na pasta "notebooks"
+Execute os notebooks sequencialmente na pasta "notebooks"
+
+```bash
+cd notebooks
+python run_pipeline.py
+```
+
+## Modelo de IA
+
+### Treinamento
+
+### Acurácia
+
+### Predição
+
 
 ## Principais Insights
 
@@ -137,17 +156,17 @@ Abaixo são os insights obtidos após a execução de todos os notebooks. Veremo
 
 ### Comparação entre Múnicipios de MG
 
-<img src="./metrics/taxa_alfabetizacao_lavras_vs_mg.png" alt="Taxa de Alfabetização em MG" width="600" >
+<img src="./reports/taxa_alfabetizacao_lavras_vs_mg.png" alt="Taxa de Alfabetização em MG" width="600" >
 
 Nessa tabela, vemos a distribuição de taxa de alfabetização em MG, onde comparamos Lavras com outros múnicipios de Minas Gerais. Na estátistica acima, vemos que Lavras possui uma taxa de alfabetização maior que mais da metade dos múnicipios, ao ter um valor aproximado de 80%. Isso indica que boa parte da população sabe ler e escrever, fator esse que afeta suas oportunidades para conseguirem melhores empregos, continuar os estudos, e possibilidade de participar numa democracia.
 
-<img src="./metrics/pop_lavras_vs_top10_mun_mg.png" alt="Tabela de Comparação entre Lavras e 10 mais populosos municípios de MG" width="600" >
+<img src="./reports/pop_lavras_vs_top10_mun_mg.png" alt="Tabela de Comparação entre Lavras e 10 mais populosos municípios de MG" width="600" >
 
 Comparando o número total populacional de Lavras com os 10 municípios mais populosos de Minas Gerais, notamos que seu valor se encontra muito abaixo deles. Como entendemos que Lavras possuí uma Taxa de Alfabetização maior que a média, pode-se dizer que seu número de habitantes mais baixo afetam na quantidade de pessoas que conseguem ler e escrever no estado de Minas Gerais.
 
 ### Correlação de Indicadores Socioeconomicos em Lavras
 
-<img src="./metrics/matriz_correlacao_lavras.png" alt="Matriz de Correlação de Indicadores Socioeconomicos em Lavras" width="600" >
+<img src="./reports/matriz_correlacao_lavras.png" alt="Matriz de Correlação de Indicadores Socioeconomicos em Lavras" width="600" >
 
 Na matriz de correlação, observamos como alguns indicadores de Lavras se relacionam entre si:
 
@@ -161,7 +180,7 @@ Na matriz de correlação, observamos como alguns indicadores de Lavras se relac
 
 ### Impacto relativo dos agentes socioeconômicos sobre PIB per capita
 
-<img src="./metrics/impacto_rel_agentes_socioeconomicos_pib_per_capita.png" alt="Matriz de Confusao de Dados Correlacionados em Lavras" width="600" >
+<img src="./reports/impacto_rel_agentes_socioeconomicos_pib_per_capita.png" alt="Matriz de Confusao de Dados Correlacionados em Lavras" width="600" >
 
 Tabela acima demonstra o impacto que determinados agentes socioeconomicos possuem sobre o PIB per Capita. Pode-se obter os seguintes insights a partir dele:
 
@@ -173,7 +192,7 @@ Tabela acima demonstra o impacto que determinados agentes socioeconomicos possue
 
 ### PIB e Valor Adicionado em Lavras (milhões)
 
-<img src="./metrics/pib_vs_valor_adicionado_em_lavras.png" alt="PIB e Valor Bruto Total de Preços adicionado em Lavras" width="600" >
+<img src="./reports/pib_vs_valor_adicionado_em_lavras.png" alt="PIB e Valor Bruto Total de Preços adicionado em Lavras" width="600" >
 
 A tabela acima compara o PIB e o Valor Adicionado Total do município de Lavras. Nele, vemos que o PIB é superior ao VA Total. O principal insight é que a diferença entre esses dois valores, que representa os Impostos Líquidos sobre Produtos, é um componente substancial na composição da riqueza total gerada em Lavras, destacando a importância da arrecadação fiscal sobre bens e serviços para a economia municipal.
 
