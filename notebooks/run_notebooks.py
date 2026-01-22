@@ -40,7 +40,8 @@ def main():
     notebooks = [
         "1_coleta_preparacao_dados.ipynb",
         "2_analise_exploratoria.ipynb", 
-        "3_modelo_predicao.ipynb"
+        "3_modelo_treinamento.ipynb",
+        "4_modelo_predicao_avaliacao.ipynb"
     ]
     
     sucessos = 0
