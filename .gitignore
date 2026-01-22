@@ -213,3 +213,6 @@ __marimo__/
 /data/raw/populacao_brasileira.csv
 /data/raw/alfabetizacao_por_sexo,raca_e_idade.csv
 /data/processed/*.csv
+/data/processed/*.ods
+/data/raw/*.csv
+/data/raw/*.ods
