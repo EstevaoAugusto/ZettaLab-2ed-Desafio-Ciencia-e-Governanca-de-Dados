@@ -6,5 +6,5 @@ plotly
 streamlit
 shap
 scikit-learn
-basededados
+basedosdados
 requests
