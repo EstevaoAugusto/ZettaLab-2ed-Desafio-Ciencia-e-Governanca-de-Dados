@@ -313,35 +313,69 @@ O gráfico acima demonstra uma relação linear entre as variáveis População 
 
 #### O que é?
 
-O agrupamento k-means é um algoritmo de aprendizado não supervisionado utilizado para agrupamento de dados, que agrupa pontos de dados não rotulados em grupos ou clusters. É um dos métodos de agrupamento mais populares usados em aprendizado de máquina. Diferentemente do aprendizado supervisionado, os dados de treinamento que esse algoritmo utiliza não são rotulados, o que significa que os pontos de dados não têm uma estrutura de classificação definida.
+O agrupamento K-Means é um algoritmo de aprendizado não supervisionado utilizado para agrupamento de dados, que agrupa pontos de dados não rotulados em grupos ou clusters. É um dos métodos de agrupamento mais populares usados em aprendizado de máquina. Diferentemente do aprendizado supervisionado, os dados de treinamento que esse algoritmo utiliza não são rotulados, o que significa que os pontos de dados não têm uma estrutura de classificação definida.
 
-Embora existam vários tipos de algoritmos de agrupamento, incluindo exclusivos, sobrepostos, hierárquicos e probabilísticos, o algoritmo de agrupamento k-means é um exemplo de um método de agrupamento exclusivo ou "hard". Essa forma de agrupamento estipula que um ponto de dados pode existir em apenas um cluster. Esse tipo de análise de cluster é comumente utilizado em ciência de dados para segmentação de mercado, agrupamento de documentos, segmentação de imagens e compactação de imagens. O algoritmo k-means é um método amplamente utilizado na análise de clusters porque é eficiente, eficaz e simples.
+O K-Means é um algoritmo de agrupamento baseado em centroides iterativo, que divide um conjunto de dados em grupos semelhantes com base na distância entre seus centroides. O centroide, ou centro do cluster, é a média ou a mediana de todos os pontos dentro do cluster, dependendo das características dos dados.
 
-O k-means é um algoritmo de agrupamento baseado em centroides iterativo, que divide um conjunto de dados em grupos semelhantes com base na distância entre seus centroides. O centroide, ou centro do cluster, é a média ou a mediana de todos os pontos dentro do cluster, dependendo das características dos dados.
+K-Means foi utilizado para o projeto a fim de categorizar municipio que sejam semelhantes entre si utilizando os seguintes fatores: impostos_liquidos, va_agropecuaria, va_industria, va_servicos, e va_adespss. Isso ajudaria a obter insights gerais como "municipios de Cluster X tendem a possuir mais investimento em area Y", além de ajudar na implementação do Random Forest. Usou-se dados entre 2016 a 2020 para o algoritmo de K-Means, a fim de captar a sazonalidade das informações.
+
+Para a seleção do número de clusters que serão utilizados no k-means, foi-se usado o Método do Cotovelo (Elbow Method) para encontrar o 'K' ideal. Tal método é baseada na análise do within-cluster sum of squares (WCSS), que mede a variação dentro dos clusters. A ideia é identificar o “cotovelo” no gráfico, onde a taxa de diminuição muda para cada k significativamente. Nesse projeto foi utilizado 5 clusters. Abaixo é o gráfico do Elbow Method.
 
 <img src="./reports/08_barplot_metodo_cotovelo.png" alt="Grafico" width="600">
   
-Para a seleção do número de clusters que serão utilizados no k-means, foi-se usado o Método do Cotovelo (Elbow Method) para encontrar o 'K' ideal. Tal método é baseada na análise do within-cluster sum of squares (WCSS), que mede a variação dentro dos clusters. A ideia é identificar o “cotovelo” no gráfico, onde a taxa de diminuição muda para cada k significativamente. Nesse projeto foi utilizado 5 clusters.
+Adicionalmente, quando o K-Means é executado, obtem se dados com clusters as quais não se sabem exatamente o que eles significam, afinal K-Means é um algoritmo de Machine Learning Não-Supervisionado, os clusters são apenas pontos aos quais registros vão estar mais proximos. Para resover isso, utilizou-se de Clusters Hierarquicos, aos quais utilizam os Clusters Originais do K-Means como base. Eles analisam a Média do PIB de cada Cluster Original, e de ordem crescente dão um novo valor para cada um, e com isso, cria Clusters Hierarquicos. Abaixo está o código para a implementação dos Clusters Hierarquicos:
 
-#### Implementação do Cluster Hierarquico
+```python
+# Executando o K-Means final com 5 clusters
+n_clusters = 5
+kmeans = KMeans(n_clusters=n_clusters, init='k-means++', random_state=42)
+clusters = kmeans.fit_predict(X_scaled)
 
-Adicionalmente, quando o K-Means é executado, obtem se dados com clusters a quais não se sabem exatamente o que eles significam, afinal K-Means é um algoritmo de Machine Learning Não-Supervisionado, os clusters são apenas pontos aos quais registros vão estar mais proximos. Para resover isso, utilizou-se de Clusters Hierarquicos, aos quais utilizam os Clusters Originais do K-Means como base. Eles analisam a Média do PIB de cada Cluster Original, e com isso, cria Clusters Hierarquicos a partir dos dados que estejam mais proximos desses.
+# Adicionando o resultado de volta ao DataFrame original
+df_aux.loc[df_aux.index, 'cluster_original'] = clusters
 
-Abaixo estão os gráficos gerados com os Clusters Hierarquicos, e a média do PIB per Capita:
+# Verificando o perfil médio de cada grupo. Os valores são ordenados de forma crescente
+medias_por_cluster = df_aux.groupby('cluster_original')['pib_per_capita'].mean().sort_values()
 
-<img src="./reports/09_distribuicao_municipios_por_nivel_de_riqueza_colorido.png" alt="Grafico" width="600">
+# Como o index de medias_por_cluster são o valor númerico do cluster, utiliza-se enumarate para então
+# criar os Clusters Hierarquicos
+mapeamento_ordenado = {cluster_antigo: i for i, cluster_antigo in enumerate(medias_por_cluster.index)}
+# Exemplo de valor: mapeamento_ordenado = { '1' : 0, '4' : 1, ...}
+
+# Cria-se uma nova coluna apenas para os Clusters Hieraquicos
+df_aux.loc[df_aux.index,'cluster_hierarquico'] = df_aux['cluster_original'].map(mapeamento_ordenado)
+```
+
+Abaixo estão os gráficos gerados com os Clusters Hierarquicos:
+
+<p align="center">
+  <img src="./reports/09_distribuicao_municipios_por_nivel_de_riqueza_colorido.png" alt="Grafico" width="45%">
+  <img src="./reports/10_distribuicao_municipios_por_nivel_de_riqueza_lavras.png" alt="Grafico" width="45%">
+</p>
+
+Dentre os **5570** múnicipios no Brasil:
+
+- **1990** pertencem ao Cluster 0.
+- **1532** pertencem ao Cluster 1. 
+- **1248** pertencem ao Cluster 2.
+- **734** pertencem ao Cluster 3.
+- **66** pertencem ao Cluster 4.
+
+Os municipios do Cluster 4, que são aqueles com maior PIB per Capita, representam quase que 1%. O que revela uma enorme discrepância entre quantidade de múnicipios e bens produzidos. O gráfico abaixo melhor reforça essa diferença:
+
+<img src="./reports/10_distribuicao_municipios_pizza_porcentagem.png" alt="Grafico" width="600">
+
+No geral, 63,2% dos múnicipios brasileiros ou se encontram no Cluster 1 ou Cluster 0. Mais da metade do páis. Sabendo que Lavras concentra-se no cluster 0, sendo que nela reside a UFLA (Universidade Federal de Lavras), umas das maiores referências no setor de Cafeicultura, Zootecnia, Veterinária e Ciências do Solo, que atua desde de 1908 (originalmente fundada como Escola Agrícola de Lavras) e é considerada umas das melhores universidades federais do páis. Pode-se assumir que maioria dos investimentos de Lavras vão para a área de serviços, nisso inclui a UFLA, quando estudantes finalizam o curso, muitas vezes podem não continuar atuando naquele mesmo múnicipio, saindo do local a fim de encontrar mais oportunidades. Em outras palavras, investe-se na Educação em Lavras, contudo esse talento nem sempre permanece no múnicipio, especialmente se os futuros profissionais forem de áreas a qual Lavras não oferece espaço para trabalho.
 
 <img src="./reports/09_barplot_media_pib_per_capita_por_cluster_hierarquico.png" alt="Grafico" width="600">
 
-Análisando esses gráficos, vemos que a maioria dos múnicipios do Brasil se encontra em Cluster 0, o quao.
-
-Apesar disso tudo, a abordagem utilizada possui limitações como por exemplo: . 
-
-<img src="./reports/10_distribuicao_municipios_por_nivel_de_riqueza_lavras.png" alt="Grafico" width="600">
-
-Ademais, o município de Lavras se encontra no Cluster 0, indicando ter menores níveis de PIB per Capita comparado com outros Clusters. Isso significa que [REDACTED].
+Apesar de termos 66 municipios no cluster 4, quase 1% da quantidade total de municipios, a tendência é de possuirem um PIB per Capita extremamente maior comparado com o resto dos clusters. A diferença entre essa e o cluster 3, que é a segunda maior média de PIB per Capita, tendo mais de 700 múnicipios agrupados é exorbitante, apenas reforçando a perda de talentos de múnicipios após os estudos na universidade. De resto, Cluster 1 e 2 são os mais estáveis, tendo menor diferença de média entre eles. Enquanto o Cluster 0 permanece por último.
 
 #### Visualização Interativa dos Clusters no Brasil
+
+Abaixo é um mapa interativo do Brasil onde os pontos são múnicipios categorizados pelos seus clusters. Nele conseguimos ver como que municipios de Cluster 0 e 1 se espalham por boa parte do pais, diferente dos outros. Clique na imagem para visualizar o mapa.
+
+[![Visualização do Mapa](./imgs/Distribuicao_Territorial_Clusters_Economicos_2019.png)](https://desafio-zettalab-ciencia-e-governanca-de-dados.streamlit.app/#visualizacao-interativa-dos-clusters-no-brasil)
 
 <a href="./interactive_reports/03_mapa_clusters_2020_destaque_lavras.html" target="_blank">addsadas</a>
 
@@ -361,9 +395,7 @@ Utilizando a implementação do Cluster Hierarquico, foi possivel
 
 #### O que é?
 
-Random forest é um algoritmo de aprendizado de máquina amplamente utilizado, registrado por Leo Breiman e Adele Cutler, que combina a saída de múltiplas decision trees para alcançar um único resultado. Sua facilidade de uso e flexibilidade impulsionaram sua adoção, pois lida com problemas de classificação e regression.
-
-Métodos de aprendizado em conjunto são compostos por um conjunto de classificadores (por exemplo, árvores de decisão), e suas previsões são agregadas para identificar o resultado mais popular. Os métodos em conjunto mais conhecidos são bagging, também conhecido como agregação bootstrap, e boosting. Em 1996, Leo Breiman lançou o método bagging; nesse método, uma amostra aleatória de dados em um conjunto de treinamento é selecionada com reposição, o que significa que os pontos de dados individuais podem ser escolhidos mais de uma vez. Após a geração de várias amostras de dados, esses modelos são, então, treinados de forma independente, e dependendo do tipo de tarefa (por exemplo, regressão ou classificação), a média ou a maioria dessas previsões resulta em uma estimativa mais precisa. Essa abordagem é comumente usada para reduzir a variância em um conjunto de dados ruidoso.
+Random forest é um algoritmo de aprendizado de máquina amplamente utilizado, que combina a saída de múltiplas decision trees (Arvores de Decisão) para alcançar um único resultado. Sua facilidade de uso e flexibilidade impulsionaram sua adoção, pois lida com problemas de classificação e regressião. Arvores de Decisão são únidades basicas simulam o processo humano de tomada de decisão. Ela utiliza uma estrutura de fluxograma para dividir os dados em grupos cada vez menores e mais específicos até chegar a uma conclusão. Tais unidades sózinhas são altamente sensíveis a variações no grupo de dados aos quais estão sendo utilizados, a fim de minimizar esse problema, o Random Forest é um algoritmo que gera diversas Arvores de Decisão, a quais para problemas de classificação, são determinados pelo voto da maioria, e para casos de regressão, são determinados a partir da média dos resultados.
 
 
 ### Regressão Linear Múltipla
@@ -391,7 +423,9 @@ A regressão linear é usada para gerar insights para gráficos que contêm pelo
 
 ## Limitações
 
-## Recomendações Estratégicas
+## Implementações Futuras
+
+## Insights
 
 ## Responsável
 
