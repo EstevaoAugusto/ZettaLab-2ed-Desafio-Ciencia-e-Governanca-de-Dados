@@ -143,7 +143,7 @@ python -m venv .venv
 source ./.venv/Scripts/activate
 ```
 
-Atualize o pip e instale as dependências:
+Atualize o pip e instale as dependências 'requirements_dev.txt':
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements_dev.txt
