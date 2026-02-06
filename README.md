@@ -561,7 +561,7 @@ O gráfico de barras representa o impacto relativo de cada agente socioeconômic
 
 Abaixo está um link para acessar um gráfico 3D que mapei os valores de industria e serviço publico, ao PIB. 
 
-[![Visualização do Mapa](./imgs/Mapa%20de%20Valor%20Industria%20vs%20Servicos%20no%20PIB.png)](https://desafio-zettalab-ciencia-e-governanca-de-dados.streamlit.app/#mapa-de-valor-industria-vs-servicos-no-pib)
+[![Visualização do Mapa](./imgs/Mapa%20de%20Valor%20Industria%20vs%20Servicos%20no%20PIB.png)](https://desafio-zettalab-ciencia-e-governanca-de-dados.streamlit.app/#visualizacao-interativa-mapa-valor-industria-e-servicos-ao-pib)
 
 ## Importância das Variáveis via SHAP
 
@@ -605,7 +605,9 @@ O gráfico SHAP oferece uma visão detalhada de como cada agente socioeconômico
 
 **Participação de Impostos:** Mostra um impacto neutro a levemente negativo quando os valores são baixos, reforçando que a arrecadação caminha junto com a geração de valor local.
 
-[![Visualização do Mapa](./imgs/Hierarquia_Agentes.png)](https://desafio-zettalab-ciencia-e-governanca-de-dados.streamlit.app/#hierarquia-agentes)
+Clique na imagem abaixo para ver com detalhes o gráfico no dashboard.
+
+[![Visualização do Mapa](./imgs/Hierarquia_Agentes.png)](https://desafio-zettalab-ciencia-e-governanca-de-dados.streamlit.app/#visualizacao-interativa-hierarquia)
 
 Este último gráfico apresenta a Hierarquia de Impacto Médio (SHAP), que quantifica a contribuição média de cada variável para a formação do preço final do PIB per capita previsto pelo modelo. O gráfico de impacto médio SHAP consolida a importância de cada agente econômico na decisão final do modelo Random Forest. Ele revela o "peso" médio que cada variável tem ao deslocar a previsão do PIB para longe da média global.
 

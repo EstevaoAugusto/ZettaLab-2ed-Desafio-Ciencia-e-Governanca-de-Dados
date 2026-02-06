@@ -920,7 +920,7 @@ O modelo obteve um **MAE de 9.095,34**. Isso indica que, em média, as previsõe
     st.write("O gráfico de barras representa o impacto relativo de cada agente socioeconômico sobre a variável alvo (PIB per capita). Em uma Regressão Linear Múltipla, o coeficiente indica o quanto o PIB per capita aumenta para cada unidade de variação na variável independente, mantendo as outras constantes. A taxa de Valor Adicionado em Administração, Defesa, Educação e Saúde Pública aparece como o maior coeficiente. Isso indica que, no conjunto de dados, investimentos e gastos públicos nesses setores têm uma correlação fortíssima com o PIB per capita municipal. Logo em seguida, a taxa_va_agropecuaria e a taxa_va_industria mostram impactos elevados. Cidades com forte produção industrial ou agrícola tendem a apresentar saltos significativos na renda per capita. Embora importante, a taxa_va_servicos aparece em quarto lugar, sugerindo que, embora onipresente, ela gera um impacto proporcionalmente menor no PIB per capita do que a especialização industrial ou pública em alguns municípios. Os Impostos possui um impacto positivo, mas moderado em comparação aos setores produtivos. Por fim, o Cluster Hierárquico tem coeficiente próximo a zero para o que sugere a categoria do grupo, por si só, não é um preditor linear tão forte quanto os valores brutos de produção (VA).")
 
     st.markdown(f"""
-                #### Visualização Interativa
+                #### Visualização Interativa Mapa Valor Industria e Servicos ao PIB
 
                 Abaixo está um link para acessar um gráfico 3D que mapei os valores de industria e serviço publico, ao PIB. 
                 """)
@@ -982,6 +982,8 @@ Para os resultados obtidos, utilizamos o modelo Random Forest.
                 **O Valor Estratégico do Grupo (cluster_hierarquico):** O cluster aparece como o segundo fator mais influente, com um impacto médio próximo a 3k. Isso valida a metodologia de agrupamento: pertencer a um determinado perfil socioeconômico é um preditor de riqueza mais forte do que o desempenho isolado de setores como agro ou indústria.
 
                 **Setores de Base (Serviços, Agro e Indústria):** Estes agentes apresentam impactos médios menores (entre 1k e 2k). Isso indica que, embora importantes, sua contribuição para o PIB per capita é mais homogênea entre os municípios, não causando desvios tão drásticos quanto a gestão pública ou a classificação do cluster.
+                
+                ### Visualização interativa Hierarquia
                 """)
     
     renderizar_hierarquia_impacto_backup(shap_values, X_test_amostra)
